@@ -127,7 +127,9 @@ const ChatLogic = {
           chatId,
           { chatName: groupName },
           { new: true }
-        );
+        )
+          .populate("users", "-password")
+          .populate("groupAdmin", "-password");
         if (!updateGroupName) throw new NotFound("updateGroupName not found");
         return resolve(updateGroupName);
       } catch (error) {
